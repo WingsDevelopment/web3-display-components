@@ -1,0 +1,62 @@
+{
+  "name": "web3-display-components",
+  "version": "0.2.1",
+  "type": "module",
+  "description": "React display components for token amounts, token values, and percentages with robust warning/error rendering.",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WingsDevelopment/web3-display-components"
+  },
+  "homepage": "https://github.com/WingsDevelopment/web3-display-components#readme",
+  "bugs": {
+    "url": "https://github.com/WingsDevelopment/web3-display-components/issues"
+  },
+  "keywords": [
+    "react",
+    "display-components",
+    "web3",
+    "tokens",
+    "crypto",
+    "finance",
+    "percentage",
+    "tailwind",
+    "skeleton",
+    "tooltip"
+  ],
+  "author": "Srdjan Rakic <bans.cowboy@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && rollup -c --bundleConfigAsCjs",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "clsx": "^2.0.0",
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "tailwind-merge": "^3.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.39.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "tslib": "^2.8.1",
+    "typescript": "^5.0.0"
+  }
+}
