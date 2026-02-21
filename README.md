@@ -4,6 +4,7 @@ React UI components for rendering web3/finance values with consistent loading, e
 
 - Display primitives: `DisplayValue`, `DisplayTokenAmount`, `DisplayTokenValue`, `DisplayPercentage`
 - Robust wrappers: `DisplayValueRobust`, `DisplayTokenAmountRobust`, `DisplayTokenValueRobust`, `DisplayPercentRobust`
+- Strongly recommended companion formatter: [`web3-robust-formatting`](https://www.npmjs.com/package/web3-robust-formatting)
 - Runtime diagnostics support: warnings/errors from robust formatting pipelines are surfaced out of the box
 - Tailwind-ready default primitives with override points for tooltip, loader, truncate, skeleton, and icons
 
@@ -11,6 +12,12 @@ React UI components for rendering web3/finance values with consistent loading, e
 
 ```bash
 npm install web3-display-components
+```
+
+Recommended (component + formatting pair):
+
+```bash
+npm install web3-display-components web3-robust-formatting
 ```
 
 Peer dependencies:
@@ -24,15 +31,24 @@ Peer dependencies:
 }
 ```
 
-### Optional robust formatting package
+### Recommended formatting package
 
-Formatting utilities were moved to a dedicated package:
+This package is display-focused. For formatting/parsing/normalization, use:
 
 ```bash
 npm install web3-robust-formatting
 ```
 
-Use `web3-robust-formatting` to produce robust values/warnings/errors, then pass them into wrappers from this package.
+Links:
+
+- npm: https://www.npmjs.com/package/web3-robust-formatting
+
+Use `web3-robust-formatting` to produce robust values/warnings/errors, then pass them into robust wrappers from this package.
+
+## Recommended Stack
+
+`web3-display-components` intentionally focuses on rendering.  
+For production usage, strongly pair it with [`web3-robust-formatting`](https://www.npmjs.com/package/web3-robust-formatting) for all formatting and runtime-safe normalization.
 
 ## Tailwind Setup
 
