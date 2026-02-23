@@ -1,6 +1,6 @@
 {
   "name": "web3-display-components",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "type": "module",
   "description": "React display components for token amounts, token values, and percentages with robust warning/error rendering.",
   "main": "dist/index.cjs.js",
