@@ -83,11 +83,20 @@ export function resolveDisplayErrorState<T>(
     ? "warning"
     : "none"
 
-  const combinedErrorMessageLines = dedupeNonEmptyLines([
-    diagnosticsSectionMessage,
+  const hasQueryError = Boolean(queryState?.isError)
+  const queryErrorMessageLines = dedupeNonEmptyLines([
     queryState?.errorMessage,
     queryErrorMessage,
   ])
+  const combinedErrorMessageLines = hasQueryError
+    ? queryErrorMessageLines
+    : dedupeNonEmptyLines([
+        diagnosticsSectionMessage,
+        ...queryErrorMessageLines,
+      ])
+  const fallbackErrorMessage = hasQueryError
+    ? queryErrorMessageLines[0]
+    : diagnosticsSectionMessage
 
   return {
     isError: Boolean(queryState?.isError || propertyHasAnyError),
@@ -99,8 +108,8 @@ export function resolveDisplayErrorState<T>(
     ),
     error:
       queryState?.error ??
-      (propertyHasAnyError
-        ? { message: diagnosticsSectionMessage ?? "Unknown error" }
+      (queryState?.isError || propertyHasAnyError
+        ? { message: fallbackErrorMessage ?? "Unknown error" }
         : undefined),
     errorMessage:
       combinedErrorMessageLines.length > 0 ? combinedErrorMessageLines.join("\n") : undefined,
