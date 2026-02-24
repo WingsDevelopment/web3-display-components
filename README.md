@@ -8,6 +8,11 @@ React UI components for rendering web3/finance values with consistent loading, e
 - Runtime diagnostics support: warnings/errors from robust formatting pipelines are surfaced out of the box
 - Tailwind-ready default primitives with override points for tooltip, loader, truncate, skeleton, and icons
 
+## See It In Action
+
+- Mock vaults page: https://react-clean-code-tutorials.vercel.app/mock-vaults
+- Storybook docs: https://react-clean-code-tutorials.vercel.app/storybook/index.html?path=/docs/display-components-token-value-field--docs
+
 ## Installation
 
 ```bash
@@ -72,22 +77,13 @@ module.exports = {
 ## Quick Start
 
 ```tsx
-import {
-  DisplayPercentRobust,
-  type RobustDisplayValue,
-} from "web3-display-components"
+import { DisplayPercentRobust } from "web3-display-components"
 import { robustFormatPercentToViewPercent } from "web3-robust-formatting"
 
 export function PnlCell({ ratio }: { ratio: unknown }) {
-  const robust = robustFormatPercentToViewPercent({
+  const property = robustFormatPercentToViewPercent({
     input: { value: ratio },
   })
-
-  const property: RobustDisplayValue<unknown> = {
-    value: robust.value,
-    warnings: robust.warnings,
-    errors: robust.errors,
-  }
 
   return <DisplayPercentRobust property={property} />
 }
@@ -107,7 +103,7 @@ export function PnlCell({ ratio }: { ratio: unknown }) {
 - `DisplayValueRobust` (aliases: `DisplayValueField`)
 - `DisplayTokenAmountRobust` (aliases: `DisplayTokenAmountField`, `DisplayTokenAmountValue`)
 - `DisplayTokenValueRobust` (aliases: `DisplayTokenValueField`, `DisplayTokenValueValue`)
-- `DisplayPercentRobust` (aliases: `DisplayPercentValue`, `DisplayPercentageRobust`, `DisplayPercentageValue`)
+- `DisplayPercentRobust` (aliases: `DisplayPercentField`, `DisplayPercentValue`, `DisplayPercentageRobust`, `DisplayPercentageField`, `DisplayPercentageValue`)
 
 Each wrapper:
 
@@ -154,6 +150,13 @@ export * from "./components/DisplayPercentage.js"
 
 // Robust wrappers + resolver helpers
 export * from "./components/robust/index.js"
+// includes:
+// DisplayValueRobust, DisplayTokenAmountRobust, DisplayTokenValueRobust,
+// DisplayPercentRobust, DisplayPercentageRobust
+// and aliases:
+// DisplayValueField, DisplayTokenAmountField, DisplayTokenValueField,
+// DisplayPercentField, DisplayPercentageField, DisplayPercentValue,
+// DisplayPercentageValue, DisplayTokenAmountValue, DisplayTokenValueValue
 
 // Defaults
 export * from "./components/defaults/DefaultComponents.js"
