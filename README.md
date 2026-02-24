@@ -100,10 +100,18 @@ export function PnlCell({ ratio }: { ratio: unknown }) {
 
 ### Robust wrappers
 
-- `DisplayValueRobust` (aliases: `DisplayValueField`)
-- `DisplayTokenAmountRobust` (aliases: `DisplayTokenAmountField`, `DisplayTokenAmountValue`)
-- `DisplayTokenValueRobust` (aliases: `DisplayTokenValueField`, `DisplayTokenValueValue`)
-- `DisplayPercentRobust` (aliases: `DisplayPercentField`, `DisplayPercentValue`, `DisplayPercentageRobust`, `DisplayPercentageField`, `DisplayPercentageValue`)
+- `DisplayValueRobust`
+- `DisplayTokenAmountRobust`
+- `DisplayTokenValueRobust`
+- `DisplayPercentRobust`
+- `DisplayPercentageRobust`
+
+Convenience `*Value` aliases are also exported:
+
+- `DisplayTokenAmountValue`
+- `DisplayTokenValueValue`
+- `DisplayPercentValue`
+- `DisplayPercentageValue`
 
 Each wrapper:
 
@@ -142,21 +150,12 @@ function CustomPercent({ queryState, property }: { queryState?: any; property?: 
 ## API Exports
 
 ```ts
-// Core components
+// Root package exports
 export * from "./components/DisplayValue.js"
 export * from "./components/DisplayTokenAmount.js"
 export * from "./components/DisplayTokenValue.js"
 export * from "./components/DisplayPercentage.js"
-
-// Robust wrappers + resolver helpers
 export * from "./components/robust/index.js"
-// includes:
-// DisplayValueRobust, DisplayTokenAmountRobust, DisplayTokenValueRobust,
-// DisplayPercentRobust, DisplayPercentageRobust
-// and aliases:
-// DisplayValueField, DisplayTokenAmountField, DisplayTokenValueField,
-// DisplayPercentField, DisplayPercentageField, DisplayPercentValue,
-// DisplayPercentageValue, DisplayTokenAmountValue, DisplayTokenValueValue
 
 // Defaults
 export * from "./components/defaults/DefaultComponents.js"
@@ -166,6 +165,15 @@ export * from "./components/defaults/Truncate.js"
 export * from "./types/QueryResponse.js"
 export * from "./types/RobustDisplayValue.js"
 export * from "./utils/tailwind.js"
+```
+
+`components/robust/index` also exports robust wrappers explicitly:
+
+```ts
+export { DisplayValueRobust } from "./DisplayValueRobust.js"
+export { DisplayTokenAmountRobust } from "./DisplayTokenAmountRobust.js"
+export { DisplayTokenValueRobust } from "./DisplayTokenValueRobust.js"
+export { DisplayPercentRobust, DisplayPercentageRobust } from "./DisplayPercentRobust.js"
 ```
 
 ## License

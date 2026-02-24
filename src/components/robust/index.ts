@@ -2,16 +2,15 @@ export * from "./types.js"
 export * from "./resolvePropertyDisplayProps.js"
 export * from "./resolveDisplayErrorState.js"
 
-export * from "./DisplayValueRobust.js"
-export * from "./DisplayTokenAmountRobust.js"
-export * from "./DisplayTokenValueRobust.js"
-export * from "./DisplayPercentRobust.js"
+export { DisplayValueRobust } from "./DisplayValueRobust.js"
+export { DisplayTokenAmountRobust } from "./DisplayTokenAmountRobust.js"
+export { DisplayTokenValueRobust } from "./DisplayTokenValueRobust.js"
+export {
+  DisplayPercentRobust,
+  DisplayPercentageRobust,
+} from "./DisplayPercentRobust.js"
 
-export { DisplayValueRobust as DisplayValueField } from "./DisplayValueRobust.js"
-export { DisplayTokenAmountRobust as DisplayTokenAmountField } from "./DisplayTokenAmountRobust.js"
-export { DisplayTokenValueRobust as DisplayTokenValueField } from "./DisplayTokenValueRobust.js"
-export { DisplayPercentRobust as DisplayPercentField } from "./DisplayPercentRobust.js"
-export { DisplayPercentageRobust as DisplayPercentageField } from "./DisplayPercentRobust.js"
+// Legacy/convenience aliases.
 export { DisplayPercentRobust as DisplayPercentValue } from "./DisplayPercentRobust.js"
 export { DisplayPercentageRobust as DisplayPercentageValue } from "./DisplayPercentRobust.js"
 export { DisplayTokenAmountRobust as DisplayTokenAmountValue } from "./DisplayTokenAmountRobust.js"
