@@ -36,6 +36,32 @@ Peer dependencies:
 }
 ```
 
+## Codex Skills (Optional)
+
+Install the packaged Codex skills with `npx`:
+
+```bash
+npx web3-display-components-codex-skill install
+npx web3-robust-formatting-codex-skill install
+```
+
+Overwrite existing installed skill versions:
+
+```bash
+npx web3-display-components-codex-skill install --force
+npx web3-robust-formatting-codex-skill install --force
+```
+
+Restart Codex after installing skills.
+
+Add recommended auto-routing instructions into your project `AGENTS.md`:
+
+```bash
+npx web3-display-components-codex-skill init-agents
+```
+
+That command appends a routing block so you do not need to explicitly say "use this skill" in every prompt. Codex can select it automatically when the task matches.
+
 ### Recommended formatting package
 
 This package is display-focused. For formatting/parsing/normalization, use:
