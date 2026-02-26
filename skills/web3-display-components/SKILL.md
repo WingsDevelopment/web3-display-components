@@ -26,6 +26,28 @@ Recommended pair:
 npm install web3-robust-formatting
 ```
 
+## Wrapper Scaffold (Display Fields)
+
+Use the built-in scaffold script when the user asks to initialize wrapper components/fields:
+
+```bash
+node scripts/init-display-fields.mjs --target src/app/components/display-fields
+```
+
+Notes:
+
+- Default target is `src/app/components/display-fields` if `--target` is omitted.
+- Use `--force` to overwrite existing files.
+- The scaffold writes: `DisplayValue.tsx`, `DisplayText.tsx`, `DisplayPercentage.tsx`, `DisplayTokenAmount.tsx`, `DisplayTokenValue.tsx`, and `index.ts`.
+- Generated wrappers type against `web3-robust-formatting` (`ViewPercent`, `ViewNumber`, `ViewBigInt`), so keep that package installed.
+- Generated wrappers use flat props: `DisplayValueProps` plus top-level `value`, `warnings`, `errors`.
+
+Prompt examples that should trigger this workflow:
+
+- `Initialize web3-display-components wrapper components.`
+- `Create display-fields folder for web3-display-components in src/app/components/display-fields.`
+- `Scaffold DisplayPercentageField/DisplayTokenAmountField/DisplayTokenValueField wrappers.`
+
 ## Core intent
 
 - Keep rendering concerns separate from formatting concerns.
@@ -71,6 +93,109 @@ Use `resolveDisplayErrorState` when you need explicit control:
   - `errorMessage`
 
 Use `resolvePropertyDisplayProps` to map robust `property.value` into display props.
+
+## Best Practice Examples from blog-examples
+
+Reference implementation files:
+
+- `/Users/srdjan/Documents/GitHub/web3-libs/blog-examples/src/app/mock-vaults/components/VaultRow.tsx`
+- `/Users/srdjan/Documents/GitHub/web3-libs/blog-examples/src/app/components/display-fields/DisplayValue.tsx`
+- `/Users/srdjan/Documents/GitHub/web3-libs/blog-examples/src/app/components/display-fields/DisplayText.tsx`
+- `/Users/srdjan/Documents/GitHub/web3-libs/blog-examples/src/app/components/display-fields/DisplayPercentage.tsx`
+- `/Users/srdjan/Documents/GitHub/web3-libs/blog-examples/src/app/components/display-fields/DisplayTokenAmount.tsx`
+- `/Users/srdjan/Documents/GitHub/web3-libs/blog-examples/src/app/components/display-fields/DisplayTokenValue.tsx`
+
+### 1) Simple text rendering (name, chain, note)
+
+```tsx
+<DisplayText
+  value={row?.name}
+  {...queryState}
+  valueClassName="text-sm font-semibold text-slate-100"
+  skeletonWidth={176}
+/>
+
+<DisplayText
+  value={row?.chain}
+  {...queryState}
+  valueClassName="text-xs text-slate-400"
+  skeletonWidth={80}
+/>
+
+<DisplayText
+  value={row?.note}
+  {...queryState}
+  valueClassName="text-xs leading-snug text-slate-500"
+  skeletonWidth={288}
+/>
+```
+
+### 2) Percentage rendering (APY, utilization)
+
+```tsx
+<DisplayPercentageField
+  {...row?.supplyApy}
+  {...row?.supplyApyQueryState}
+  {...queryState}
+  symbolClassName="text-slate-300"
+/>
+
+<DisplayPercentageField
+  {...row?.utilization}
+  {...row?.utilizationQueryState}
+  {...queryState}
+  symbolClassName="text-slate-300"
+/>
+```
+
+### 3) Token amount + token value in one cell
+
+```tsx
+<div className="space-y-1">
+  <DisplayTokenAmountField
+    {...row?.totalSupplyAmount}
+    {...row?.totalSupplyAmountQueryState}
+    {...queryState}
+    symbolClassName="text-slate-300"
+  />
+
+  <DisplayTokenValueField
+    {...row?.totalSupplyUsd}
+    {...row?.totalSupplyUsdQueryState}
+    {...queryState}
+    symbolClassName="text-slate-500"
+  />
+</div>
+```
+
+### 4) Local injection pattern (tooltip + warning/error icon)
+
+This is app-level concern, not forced by the library.
+
+```tsx
+const { severity, ...resolvedErrorState } = resolveDisplayErrorState({
+  ...property,
+  ...queryState,
+})
+const ErrorIconComponent = severity === "warning" ? MyWarningIcon : MyErrorIcon
+
+return (
+  <DisplayTokenValue
+    {...queryState}
+    {...resolvedErrorState}
+    ErrorIconComponent={ErrorIconComponent}
+    {...property?.value}
+  />
+)
+```
+
+## Best-practice checklist from blog-examples
+
+- Keep table row components presentation-only; do formatting in mapper layer.
+- Pass robust payloads directly to display wrappers via spread: `{...row?.field}`.
+- Merge field-level and global query states explicitly: `{ ...fieldQueryState, ...queryState }`.
+- Keep symbol/sign positioning in display components, not pre-concatenated strings.
+- Inject tooltip and icon components at app level to match local design system.
 
 ## Recommended integration pattern
 
@@ -134,8 +259,9 @@ Consumers must include package files in Tailwind scan paths to generate class na
 
 When using this skill, Codex should:
 
-- choose display primitives by semantic intent (token amount/value/percent)
+- choose display primitives by semantic intent (token amount/value/percent/text)
 - use robust wrappers when diagnostics exist
 - preserve compatibility aliases during migrations
 - keep resolver helpers pure and reusable
 - update README exports and usage examples whenever public component APIs change
+- mirror established VaultRow patterns when adding new table/value cells

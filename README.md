@@ -62,6 +62,20 @@ npx web3-display-components-codex-skill init-agents
 
 That command appends a routing block so you do not need to explicitly say "use this skill" in every prompt. Codex can select it automatically when the task matches.
 
+Scaffold local wrapper fields folder from a prompt:
+
+- Example prompt: `Initialize web3-display-components wrapper components in src/app/components/display-fields.`
+- The skill will generate `DisplayValue.tsx`, `DisplayText.tsx`, `DisplayPercentage.tsx`, `DisplayTokenAmount.tsx`, `DisplayTokenValue.tsx`, and `index.ts`.
+- Generated wrappers use `web3-robust-formatting` types, so keep both packages installed.
+
+Direct command (optional):
+
+```bash
+node ~/.codex/skills/web3-display-components/scripts/init-display-fields.mjs --target src/app/components/display-fields
+```
+
+Use `--force` to overwrite existing files.
+
 ### Recommended formatting package
 
 This package is display-focused. For formatting/parsing/normalization, use:

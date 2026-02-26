@@ -100,6 +100,7 @@ function initAgentsFile({ file }) {
     "## Codex Skill Routing (web3-display-components)",
     "- Use `web3-display-components` skill for display-layer tasks: `DisplayValue`, token/value/percentage renderers, robust display wrappers, and `resolveDisplayErrorState` integration.",
     "- Use `web3-robust-formatting` skill for formatting/normalization tasks and then pass robust outputs into these components.",
+    "- If asked to initialize wrapper/field components, run `node ~/.codex/skills/web3-display-components/scripts/init-display-fields.mjs --target <path>` and scaffold the full folder.",
     markerEnd,
     "",
   ].join("\n")
